@@ -1,0 +1,17 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Adi</th>
+    <th scope="col">Yazari</th>
+    <th scope="col">Handle</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let book of books">
+  <tr>
+    <th scope="row" >{{book.id}}</th>
+    <td colspan="2">Larry the Bird</td>
+    <td>@twitter</td>
+  </tr>
+  </tbody>
+</table>

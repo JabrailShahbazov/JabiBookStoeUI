@@ -8,6 +8,7 @@ import { BooksComponent } from './books/books.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthorsComponent } from './authors/authors.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { BookDetailComponent } from './books/book-detail/book-detail.component';
 
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
@@ -28,7 +29,8 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     AppComponent,
     BooksComponent,
     HeaderComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    BookDetailComponent
   ],
   imports: [
     BrowserModule,
