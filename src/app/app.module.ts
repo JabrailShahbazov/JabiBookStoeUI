@@ -9,6 +9,8 @@ import { HeaderComponent } from './header/header.component';
 import { AuthorsComponent } from './authors/authors.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
+import { AddEditBookComponent } from './books/add-edit-book/add-edit-book.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 export function configureAuth(oidcConfigService: OidcConfigService) {
@@ -30,7 +32,8 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     BooksComponent,
     HeaderComponent,
     AuthorsComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    AddEditBookComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     HttpClientModule,
     AppRoutingModule,
     AuthModule.forRoot(),
+    NgbModule,
   ],
   providers: [
     OidcConfigService,

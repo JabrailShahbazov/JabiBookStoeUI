@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {BooksComponent} from './books/books.component';
 import {AuthorsComponent} from './authors/authors.component';
 import {BookDetailComponent} from './books/book-detail/book-detail.component';
+import {NgbAlertModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {path: '', redirectTo: '/book', pathMatch: 'full'},
@@ -16,7 +17,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    NgbPaginationModule, NgbAlertModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
