@@ -24,4 +24,21 @@ export class DataStorageService {
     });
   }
 
+  deleteBook(id: number) {
+    return this.http.delete(this.pathURL + '/api/app/book/' + id, {
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + this.token,
+      }),
+    }).subscribe({
+      next: data => {
+        this.getBooks();
+        console.log('Delete successful');
+      },
+      error: error => {
+        const serrorMessage = error.message;
+        console.error('There was an error!', error);
+      }
+    });
+  }
+
 }

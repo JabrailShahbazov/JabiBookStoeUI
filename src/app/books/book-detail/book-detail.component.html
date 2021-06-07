@@ -9,9 +9,13 @@
   </thead>
   <tbody *ngFor="let book of books">
   <tr>
-    <th scope="row" >{{book.id}}</th>
-    <td colspan="2">Larry the Bird</td>
-    <td>@twitter</td>
+    <th scope="row">{{book.id}}</th>
+    <td>{{book.name}}</td>
+    <td>{{book.authorName}}</td>
+    <td>
+      <button class="btn btn-success">Edit</button>
+      <button class="btn btn-danger"  (click)="onDelete(book.id)">Remove</button>
+    </td>
   </tr>
   </tbody>
 </table>

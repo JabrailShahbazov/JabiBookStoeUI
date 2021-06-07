@@ -22,4 +22,9 @@ export class BookDetailComponent implements OnInit {
     });
   }
 
+  // tslint:disable-next-line:typedef
+  onDelete(id: number) {
+    this.dataStorageService.deleteBook(id);
+
+  }
 }
