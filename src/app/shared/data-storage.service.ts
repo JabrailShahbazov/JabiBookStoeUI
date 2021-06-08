@@ -6,12 +6,13 @@ import {Observable} from 'rxjs';
 import {observableToBeFn} from 'rxjs/internal/testing/TestScheduler';
 import {EditBook} from '../model/Book/editBook';
 import {CreateBook} from '../model/Book/createBook';
+import {GettAuthorWithBook} from '../model/Book/GettAuthorWithBook';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataStorageService {
-  pathURL = 'https://localhost:44335/api/app/book/';
+  pathURL = 'https://localhost:44335/api/app/book';
   token = this.oidcSecurityService.getToken();
 
   tokenHeader = {
@@ -29,7 +30,7 @@ export class DataStorageService {
   }
 
   deleteBook(id: number): Observable<any> {
-    return this.http.delete(`${this.pathURL}${id}`, this.tokenHeader);
+    return this.http.delete(`${this.pathURL}/${id}`, this.tokenHeader);
   }
 
   createBook(data: CreateBook): Observable<CreateBook> {
@@ -37,7 +38,11 @@ export class DataStorageService {
   }
 
   updateBook(id: number, data: EditBook): Observable<EditBook> {
-    return this.http.put<EditBook>(`${this.pathURL}${id}`, data, this.tokenHeader);
+    return this.http.put<EditBook>(`${this.pathURL}/${id}`, data, this.tokenHeader);
+  }
+
+  getAuthorsWithBook(): Observable<GettAuthorWithBook> {
+    return this.http.get<GettAuthorWithBook>(`${this.pathURL}/author-lookup`, this.tokenHeader);
   }
 
   //

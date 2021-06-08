@@ -6,6 +6,8 @@ import {Observable} from 'rxjs';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgForm} from '@angular/forms';
 import {EditBook} from '../../model/Book/editBook';
+import {GettAuthorWithBook, InBookAtor} from '../../model/Book/GettAuthorWithBook';
+import {CreateBook} from '../../model/Book/createBook';
 
 @Component({
   selector: 'app-book-detail',
@@ -18,48 +20,63 @@ export class BookDetailComponent implements OnInit {
               private modalService: NgbModal) {
   }
 
-  idN: number = null;
+  idBook: number;
   editMode = false;
   books: [bookWiew];
+  authorWithBook: [InBookAtor];
   editBook: EditBook;
-  closeResult = '';
+  createBook: CreateBook = new CreateBook();
 
   ngOnInit(): void {
     this.dataStorageService.getBooks().subscribe(data => {
       this.books = data.items;
     });
+    this.dataStorageService.getAuthorsWithBook().subscribe(data => {
+      this.authorWithBook = data.items;
+    });
   }
 
   // tslint:disable-next-line:typedef
   onDelete(id: number) {
-    this.dataStorageService.deleteBook(id).subscribe({
-      next: data => {
-        this.dataStorageService.getBooks().subscribe();
-        console.log('Is deleted');
-      },
-      error: data => {
-        console.log('Error Data');
-      }
+    this.dataStorageService.deleteBook(id).subscribe(data => {
+      this.ngOnInit();
     });
 
   }
 
-
   // tslint:disable-next-line:typedef
   open(content, id: number) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
+      this.idBook = id;
     }, (reason) => {
       console.log(id);
     });
   }
 
   // tslint:disable-next-line:typedef
-  onSubmit(form: NgForm) {
+  openNew(content) {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      //
+    }, (reason) => {
+
+      console.log(reason);
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  onCreateSubmit(form: NgForm) {
+    this.dataStorageService.createBook(this.createBook).subscribe(data => {
+
+      console.log(data);
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  onUpdateSubmit(form: NgForm) {
     const value = form.value;
     this.editBook = new EditBook(value.publishDate, value.description);
-    this.dataStorageService.updateBook(this.idN, this.editBook).subscribe(data => {
-      this.dataStorageService.getBooks().subscribe();
+    this.dataStorageService.updateBook(this.idBook, this.editBook).subscribe(data => {
+      this.ngOnInit();
       console.log(data);
     });
   }
