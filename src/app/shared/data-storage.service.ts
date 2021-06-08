@@ -4,58 +4,45 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {GetBookModule} from '../model/Book/get-book.module';
 import {Observable} from 'rxjs';
 import {observableToBeFn} from 'rxjs/internal/testing/TestScheduler';
+import {EditBook} from '../model/Book/editBook';
+import {CreateBook} from '../model/Book/createBook';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataStorageService {
+  pathURL = 'https://localhost:44335/api/app/book/';
   token = this.oidcSecurityService.getToken();
-  pathURL = 'https://localhost:44335';
+
+  tokenHeader = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + this.token,
+    }),
+  };
 
   constructor(public oidcSecurityService: OidcSecurityService,
               public http: HttpClient) {
   }
 
   getBooks(): Observable<GetBookModule> {
-    return this.http.get<GetBookModule>(this.pathURL + '/api/app/book', {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + this.token,
-      }),
-    });
+    return this.http.get<GetBookModule>(this.pathURL, this.tokenHeader);
   }
 
-  deleteBook(id: number) {
-    return this.http.delete(this.pathURL + '/api/app/book/' + id, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + this.token,
-      }),
-    }).subscribe({
-      next: data => {
-        this.getBooks();
-        console.log('Delete successful');
-      },
-      error: error => {
-        const serrorMessage = error.message;
-        console.error('There was an error!', error);
-      }
-    });
+  deleteBook(id: number): Observable<any> {
+    return this.http.delete(`${this.pathURL}${id}`, this.tokenHeader);
   }
 
-  editBook(id: number) {
-    return this.http.put(this.pathURL + '/api/app/book/' + id, {
-      headers: new HttpHeaders({
-        Authorization: 'Bearer ' + this.token,
-      }),
-    }).subscribe({
-      next: data => {
-        this.getBooks();
-        console.log('Delete successful');
-      },
-      error: error => {
-        const serrorMessage = error.message;
-        console.error('There was an error!', error);
-      }
-    });
+  createBook(data: CreateBook): Observable<CreateBook> {
+    return this.http.post<CreateBook>(this.pathURL, data, this.tokenHeader);
   }
+
+  updateBook(id: number, data: EditBook): Observable<EditBook> {
+    return this.http.put<EditBook>(`${this.pathURL}${id}`, data, this.tokenHeader);
+  }
+
+  //
+  // findByBook(data:GetBookModule):Observable<GetBookModule>{
+  //   return this.http.get<GetBookModule>(`${}`)
+  // }
 
 }

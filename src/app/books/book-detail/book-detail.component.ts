@@ -4,6 +4,8 @@ import {DataStorageService} from '../../shared/data-storage.service';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Observable} from 'rxjs';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgForm} from '@angular/forms';
+import {EditBook} from '../../model/Book/editBook';
 
 @Component({
   selector: 'app-book-detail',
@@ -15,8 +17,11 @@ export class BookDetailComponent implements OnInit {
               private route: ActivatedRoute,
               private modalService: NgbModal) {
   }
+
+  idN: number = null;
   editMode = false;
   books: [bookWiew];
+  editBook: EditBook;
   closeResult = '';
 
   ngOnInit(): void {
@@ -27,34 +32,36 @@ export class BookDetailComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onDelete(id: number) {
-    this.dataStorageService.deleteBook(id);
+    this.dataStorageService.deleteBook(id).subscribe({
+      next: data => {
+        this.dataStorageService.getBooks().subscribe();
+        console.log('Is deleted');
+      },
+      error: data => {
+        console.log('Error Data');
+      }
+    });
 
   }
 
 
+  // tslint:disable-next-line:typedef
   open(content, id: number) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-    if (this.books.length) {
-      //console.log(this.books.length);
-    }
-    if (id == null) {
-      console.log('yoxdu');
-    } else {
       console.log(id);
-    }
+    });
   }
 
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return `with: ${reason}`;
-    }
+  // tslint:disable-next-line:typedef
+  onSubmit(form: NgForm) {
+    const value = form.value;
+    this.editBook = new EditBook(value.publishDate, value.description);
+    this.dataStorageService.updateBook(this.idN, this.editBook).subscribe(data => {
+      this.dataStorageService.getBooks().subscribe();
+      console.log(data);
+    });
   }
 }
+
