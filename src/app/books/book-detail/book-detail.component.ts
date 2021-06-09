@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {bookWiew, GetBookModule} from '../../model/Book/get-book.module';
+import {bookWiew} from '../../model/Book/get-book.module';
 import {DataStorageService} from '../../shared/data-storage.service';
 import {ActivatedRoute, Params} from '@angular/router';
-import {Observable} from 'rxjs';
-import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgForm} from '@angular/forms';
 import {EditBook} from '../../model/Book/editBook';
-import {GettAuthorWithBook, InBookAtor} from '../../model/Book/GettAuthorWithBook';
+import {InBookAtor} from '../../model/Book/GettAuthorWithBook';
 import {CreateBook} from '../../model/Book/createBook';
 
 @Component({
@@ -66,7 +65,7 @@ export class BookDetailComponent implements OnInit {
   // tslint:disable-next-line:typedef
   onCreateSubmit(form: NgForm) {
     this.dataStorageService.createBook(this.createBook).subscribe(data => {
-
+      this.ngOnInit();
       console.log(data);
     });
   }

@@ -9,10 +9,10 @@ import { HeaderComponent } from './header/header.component';
 import { AuthorsComponent } from './authors/authors.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
-import { AddEditBookComponent } from './books/add-edit-book/add-edit-book.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
+// tslint:disable-next-line:typedef
 export function configureAuth(oidcConfigService: OidcConfigService) {
   return () =>
     oidcConfigService.withConfig({
@@ -22,6 +22,9 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
       redirectUrl: window.location.origin,
       postLogoutRedirectUri: window.location.origin,
       scope: 'offline_access openid profile role email phone BookStore',
+      silentRenew: true,
+      useRefreshToken: true,
+      renewTimeBeforeTokenExpiresInSeconds: 10,
       logLevel: LogLevel.Debug,
     });
 }
@@ -33,7 +36,6 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     HeaderComponent,
     AuthorsComponent,
     BookDetailComponent,
-    AddEditBookComponent
   ],
   imports: [
     BrowserModule,

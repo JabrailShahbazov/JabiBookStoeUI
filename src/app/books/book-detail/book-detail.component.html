@@ -35,15 +35,12 @@
     <div class="modal-body">
       <form method="post" (ngSubmit)="onUpdateSubmit(f)" #f="ngForm">
         <div class="form-group">
-          <label for="publishDate">publishDate</label>
-          <!--          <div class="input-goup">-->
-          <!--            <input id="publishDate" class="form-control" placeholder="{{book.publishDate}}" name="publishDate" ngModel required-->
-          <!--                   ngbDatepicker #dp="ngbDatepicker">-->
-          <!--            <div class="input-group-append">-->
-          <!--              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button">ffff</button>-->
-          <!--            </div>-->
-          <!--          </div>-->
-          <input type="text" ngModel required name="publishDate" placeholder="{{book.publishDate}}" id="publishDate">
+
+          <div class="form-input">
+            <input  class="form-control" type="date" id="publishDate"
+                   name="publishDate" placeholder="{{book.publishDate}}"
+                   ngModel>
+          </div>
           <div class="form-group">
             <label for="description">description</label>
             <div class="input-group">
