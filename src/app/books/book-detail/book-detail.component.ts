@@ -40,11 +40,11 @@ export class BookDetailComponent implements OnInit {
     this.dataStorageService.deleteBook(id).subscribe(data => {
       this.ngOnInit();
     });
-
   }
 
   // tslint:disable-next-line:typedef
   open(content, id: number) {
+
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.idBook = id;
     }, (reason) => {

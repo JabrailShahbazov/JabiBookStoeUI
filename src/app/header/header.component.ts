@@ -13,10 +13,12 @@ export class HeaderComponent implements OnInit {
     public http: HttpClient) {
   }
 
+  isLogin: boolean;
+
   ngOnInit(): void {
     this.oidcSecurityService
       .checkAuth()
-      .subscribe((auth) => console.log('is authenticated', auth));
+      .subscribe((auth) => console.log('is authenticated', this.isLogin = auth));
   }
 
   login() {
@@ -25,7 +27,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.oidcSecurityService.logoffAndRevokeTokens()
-      .subscribe((result) => console.log(result));
+      .subscribe();
   }
 
 }

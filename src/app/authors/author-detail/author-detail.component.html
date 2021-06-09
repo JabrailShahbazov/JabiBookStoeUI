@@ -1,0 +1,103 @@
+<button class="btn  btn-outline-success my-4" (click)="openNew(New)">New</button>
+
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Adi</th>
+    <th scope="col">Dogum Tarixi</th>
+    <th scope="col">Qisa bio</th>
+
+  </tr>
+  </thead>
+  <tbody *ngFor="let author of authors; ">
+  <tr>
+    <th scope="row">{{author.name}}</th>
+    <td>{{author.birthDate}}</td>
+    <td>{{author.shortBio}}</td>
+    <td>
+      <button class="btn  btn-outline-primary" (click)="open(content, author.id)">Edit</button>
+      <button class="btn btn-danger" (click)="onDelete(author.id)">Remove</button>
+    </td>
+  </tr>
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>ssss
+      </button>
+    </div>
+    <div class="modal-body">
+      <form method="post" (ngSubmit)="onUpdateSubmit(f)" #f="ngForm">
+        <div class="form-group">
+
+
+          <div class="form-input">
+            <input class="form-control" type="date" id="birthDate"
+                   name="birthDate" placeholder="{{author.birthDate}}"
+                   ngModel>
+          </div>
+
+          <div class="form-group">
+            <label for="shortBio">Bio</label>
+            <div class="input-group">
+      <textarea cols="4"
+                id="shortBio"
+                class="form-control"
+                name="shortBio"
+                ngModel placeholder="{{author.shortBio}}">
+          </textarea>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+      </form>
+    </div>
+    <!--  <div class="modal-footer">-->
+
+    <!--  </div>-->
+  </ng-template>
+  </tbody>
+</table>
+
+<ng-template #New let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Book</h4>
+    <button type="button" class="close btn btn-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form method="post" (ngSubmit)="onCreateSubmit(f)" #f="ngForm">
+      <div class="form-group">
+        <div class="form-input">
+          <input [(ngModel)]="createAuthor.name" class="form-control" type="text" id="name"
+                 name="name" placeholder="name"
+                 ngModel>
+        </div>
+
+        <div class="form-input">
+          <input [(ngModel)]="createAuthor.birthDate" class="form-control" type="date" id="birthDate"
+                 name="birthDate" placeholder="birthDate"
+                 ngModel>
+        </div>
+
+        <div class="form-group">
+          <label for="shortBio">Bio</label>
+          <div class="input-group">
+      <textarea [(ngModel)]="createAuthor.shortBio" cols="4"
+                id="shortBio"
+                class="form-control"
+                name="shortBio"
+                ngModel placeholder="shortBio">
+          </textarea>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </form>
+  </div>
+  <!--  <div class="modal-footer">-->
+
+  <!--  </div>-->
+</ng-template>

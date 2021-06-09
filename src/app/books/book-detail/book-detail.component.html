@@ -79,8 +79,19 @@
                  ngModel>
         </div>
         <div class="form-input py-2">
-          <input [(ngModel)]="createBook.type" class="form-control" type="number" id="type" name="type"
-                 placeholder="type" ngModel>
+          <select [(ngModel)]="createBook.type" class="form-select" name="type" id="type"ngModel
+                  aria-label="Default select example">
+            <option selected value="0">Undefined</option>
+            <option  value="1">Adventure</option>
+            <option  value="2">Biography</option>
+            <option  value="3">Dystopia</option>
+            <option  value="4">Fantastic</option>
+            <option  value="5">Horror</option>
+            <option  value="6">Science</option>
+            <option  value="7">ScienceFiction</option>
+            <option  value="8">Poetry</option>
+          </select>
+
         </div>
         <div class="form-input">
           <input [(ngModel)]="createBook.publishDate" class="form-control" type="date" id="publishDate"

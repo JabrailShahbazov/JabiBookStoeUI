@@ -10,6 +10,7 @@ import { AuthorsComponent } from './authors/authors.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthorDetailComponent } from './authors/author-detail/author-detail.component';
 
 
 // tslint:disable-next-line:typedef
@@ -36,6 +37,7 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
     HeaderComponent,
     AuthorsComponent,
     BookDetailComponent,
+    AuthorDetailComponent,
   ],
   imports: [
     BrowserModule,

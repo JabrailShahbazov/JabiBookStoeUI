@@ -7,12 +7,16 @@ import {observableToBeFn} from 'rxjs/internal/testing/TestScheduler';
 import {EditBook} from '../model/Book/editBook';
 import {CreateBook} from '../model/Book/createBook';
 import {GettAuthorWithBook} from '../model/Book/GettAuthorWithBook';
+import {GetAuthor} from '../model/Author/getAuthor';
+import {CreateAuthor} from '../model/Author/createAuthor';
+import {UpdateAuthor} from '../model/Author/updateAuthor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataStorageService {
-  pathURL = 'https://localhost:44335/api/app/book';
+  BookURL = 'https://localhost:44335/api/app/book';
+  AuthorURL = 'https://localhost:44335/api/app/author';
   token = this.oidcSecurityService.getToken();
 
   tokenHeader = {
@@ -26,23 +30,40 @@ export class DataStorageService {
   }
 
   getBooks(): Observable<GetBookModule> {
-    return this.http.get<GetBookModule>(this.pathURL, this.tokenHeader);
+    return this.http.get<GetBookModule>(this.BookURL, this.tokenHeader);
   }
 
   deleteBook(id: number): Observable<any> {
-    return this.http.delete(`${this.pathURL}/${id}`, this.tokenHeader);
+    return this.http.delete(`${this.BookURL}/${id}`, this.tokenHeader);
   }
 
   createBook(data: CreateBook): Observable<CreateBook> {
-    return this.http.post<CreateBook>(this.pathURL, data, this.tokenHeader);
+    return this.http.post<CreateBook>(this.BookURL, data, this.tokenHeader);
   }
 
   updateBook(id: number, data: EditBook): Observable<EditBook> {
-    return this.http.put<EditBook>(`${this.pathURL}/${id}`, data, this.tokenHeader);
+    return this.http.put<EditBook>(`${this.BookURL}/${id}`, data, this.tokenHeader);
   }
 
   getAuthorsWithBook(): Observable<GettAuthorWithBook> {
-    return this.http.get<GettAuthorWithBook>(`${this.pathURL}/author-lookup`, this.tokenHeader);
+    return this.http.get<GettAuthorWithBook>(`${this.BookURL}/author-lookup`, this.tokenHeader);
+  }
+
+
+  getAuthors(): Observable<GetAuthor> {
+    return this.http.get<GetAuthor>(this.AuthorURL, this.tokenHeader);
+  }
+
+  deleteAuthor(id: number): Observable<any> {
+    return this.http.delete(`${this.AuthorURL}/${id}`, this.tokenHeader);
+  }
+
+  createAuthor(data: CreateAuthor): Observable<CreateAuthor> {
+    return this.http.post<CreateAuthor>(this.AuthorURL, data, this.tokenHeader);
+  }
+
+  updateAuthor(id: number, data: UpdateAuthor): Observable<UpdateAuthor> {
+    return this.http.put<UpdateAuthor>(`${this.AuthorURL}/${id}`, data, this.tokenHeader);
   }
 
   //
