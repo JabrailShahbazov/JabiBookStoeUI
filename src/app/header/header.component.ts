@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {OidcSecurityService} from 'angular-auth-oidc-client';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
+import {AuthorService} from '../auth/author.service';
+import {AuthorLoginModel} from '../auth/authorLogin.model';
 
 @Component({
   selector: 'app-header',
@@ -8,26 +9,10 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(
-    public oidcSecurityService: OidcSecurityService,
-    public http: HttpClient) {
+  constructor() {
   }
-
-  isLogin: boolean;
-
   ngOnInit(): void {
-    this.oidcSecurityService
-      .checkAuth()
-      .subscribe((auth) => console.log('is authenticated', this.isLogin = auth));
-  }
 
-  login() {
-    this.oidcSecurityService.authorize();
-  }
-
-  logout() {
-    this.oidcSecurityService.logoffAndRevokeTokens()
-      .subscribe();
   }
 
 }

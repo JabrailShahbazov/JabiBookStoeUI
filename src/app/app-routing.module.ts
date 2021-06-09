@@ -5,20 +5,20 @@ import {AuthorsComponent} from './authors/authors.component';
 import {BookDetailComponent} from './books/book-detail/book-detail.component';
 import {NgbAlertModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthorDetailComponent} from './authors/author-detail/author-detail.component';
+import {AuthComponent} from './auth/auth.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/book', pathMatch: 'full'},
+  {path: 'login', component: AuthComponent},
   {
     path: 'book', component: BooksComponent,
     children: [
       {path: '', component: BookDetailComponent},
-      // {path: '/new', component: AddEditBookComponent},
     ]
   },
   {
     path: 'author', component: AuthorsComponent, children: [
-      {path: '', component: AuthorDetailComponent  },
-      // {path: '/new', component: AddEditBookComponent},
+      {path: '', component: AuthorDetailComponent},
     ]
   },
 ];

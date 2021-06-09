@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {OidcSecurityService} from 'angular-auth-oidc-client';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {GetBookModule} from '../model/Book/get-book.module';
 import {Observable} from 'rxjs';
@@ -10,6 +9,8 @@ import {GettAuthorWithBook} from '../model/Book/GettAuthorWithBook';
 import {GetAuthor} from '../model/Author/getAuthor';
 import {CreateAuthor} from '../model/Author/createAuthor';
 import {UpdateAuthor} from '../model/Author/updateAuthor';
+import {AuthorService} from '../auth/author.service';
+import {AuthorLoginModel} from '../auth/authorLogin.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,9 @@ import {UpdateAuthor} from '../model/Author/updateAuthor';
 export class DataStorageService {
   BookURL = 'https://localhost:44335/api/app/book';
   AuthorURL = 'https://localhost:44335/api/app/author';
-  token = this.oidcSecurityService.getToken();
+  token = document.cookie.split('; ')
+    .find(row => row.startsWith('IdentityToken='))
+    .split('=')[1];
 
   tokenHeader = {
     headers: new HttpHeaders({
@@ -25,7 +28,7 @@ export class DataStorageService {
     }),
   };
 
-  constructor(public oidcSecurityService: OidcSecurityService,
+  constructor(public oidcSecurityService: AuthorService,
               public http: HttpClient) {
   }
 
