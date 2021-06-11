@@ -38,8 +38,8 @@
 
           <div class="form-input">
             <input  class="form-control" type="date" id="publishDate"
-                   name="publishDate" placeholder="{{book.publishDate}}"
-                   ngModel>
+                   name="publishDate" [(ngModel)]="book.publishDate"
+                   >
           </div>
           <div class="form-group">
             <label for="description">description</label>
@@ -48,7 +48,7 @@
                 id="description"
                 class="form-control"
                 name="description"
-                ngModel placeholder="{{book.description}}">
+                [(ngModel)]="book.description">
           </textarea>
             </div>
           </div>

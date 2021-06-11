@@ -8,7 +8,7 @@ import {AuthorDetailComponent} from './authors/author-detail/author-detail.compo
 import {AuthComponent} from './auth/auth.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/book', pathMatch: 'full'},
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: AuthComponent},
   {
     path: 'book', component: BooksComponent,

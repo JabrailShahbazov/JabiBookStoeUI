@@ -11,6 +11,7 @@ import { BookDetailComponent } from './books/book-detail/book-detail.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AuthorDetailComponent } from './authors/author-detail/author-detail.component';
 import { AuthComponent } from './auth/auth.component';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 
 // // tslint:disable-next-line:typedef
@@ -39,6 +40,7 @@ import { AuthComponent } from './auth/auth.component';
     BookDetailComponent,
     AuthorDetailComponent,
     AuthComponent,
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,

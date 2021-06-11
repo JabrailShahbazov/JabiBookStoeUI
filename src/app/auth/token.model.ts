@@ -1,7 +1,13 @@
 // tslint:disable-next-line:class-name
 export class token {
-  access_token: string;
-  expires_in: number;
-  token_type: string;
-  scope: string;
+  // tslint:disable-next-line:variable-name
+  public access_token ?: string;
+  // tslint:disable-next-line:variable-name
+  public expires_in ?: number;
+  // tslint:disable-next-line:variable-name
+  public token_type ?: string;
+  public scope ?: string;
+  // tslint:disable-next-line:variable-name
+  public error_description ?: string;
+  public error ?: string;
 }

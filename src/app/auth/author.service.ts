@@ -23,4 +23,8 @@ export class AuthorService {
       .set('scope', 'BookStore');
     return this.http.post<token>(`${this.URL}/connect/token`, body, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
   }
+
+  logout(): Observable<token> {
+    return this.http.get<token>(`${this.URL}/api/account/logout`, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
+  }
 }
