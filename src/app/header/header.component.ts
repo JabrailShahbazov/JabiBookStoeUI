@@ -8,25 +8,27 @@ import {LoginConformation} from '../auth/loginConformation';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
   constructor(private authService: AuthorService, private router: Router) {
   }
 
-  involvedUser: LoginConformation;
 
   ngOnInit(): void {
-    this.involvedUser = true;
+    LoginConformation.involvedUser = true;
+  }
+
+  get involvedUser(): boolean {
+    return LoginConformation.involvedUser;
   }
 
   // tslint:disable-next-line:typedef
   logout() {
     this.authService.logout().subscribe(data => {
-      this.involvedUser = false;
+      LoginConformation.involvedUser = false;
       console.warn(`${this.involvedUser} Header Login`);
       this.router.navigate(['/login']);
     });
   }
-
 
 
 }

@@ -7,6 +7,7 @@ import {NgForm} from '@angular/forms';
 import {EditBook} from '../../model/Book/editBook';
 import {InBookAtor} from '../../model/Book/GettAuthorWithBook';
 import {CreateBook} from '../../model/Book/createBook';
+import {LoginConformation} from '../../auth/loginConformation';
 
 @Component({
   selector: 'app-book-detail',
@@ -34,7 +35,9 @@ export class BookDetailComponent implements OnInit {
       this.authorWithBook = data.items;
     });
   }
-
+  get involvedUser(): boolean {
+    return LoginConformation.involvedUser;
+  }
   // tslint:disable-next-line:typedef
   onDelete(id: number) {
     this.dataStorageService.deleteBook(id).subscribe(data => {

@@ -1,3 +1,3 @@
 export class LoginConformation {
-  public static involvedUser: boolean;
+  public static involvedUser = false;
 }

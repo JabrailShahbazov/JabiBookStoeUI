@@ -6,6 +6,7 @@ import {BookDetailComponent} from './books/book-detail/book-detail.component';
 import {NgbAlertModule, NgbPaginationModule} from '@ng-bootstrap/ng-bootstrap';
 import {AuthorDetailComponent} from './authors/author-detail/author-detail.component';
 import {AuthComponent} from './auth/auth.component';
+import {AuthGuard} from './auth/auth.guard';
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},

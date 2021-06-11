@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {LoginConformation} from './auth/loginConformation';
 
 
 @Component({
@@ -8,7 +9,10 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AppComponent implements OnInit {
   ngOnInit(): void {
+    LoginConformation.involvedUser = false;
   }
 
-
+  get involvedUser(): boolean {
+    return LoginConformation.involvedUser;
+  }
 }
