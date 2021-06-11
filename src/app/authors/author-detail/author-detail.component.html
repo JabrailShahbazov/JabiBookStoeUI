@@ -35,8 +35,7 @@
 
           <div class="form-input">
             <input class="form-control" type="date" id="birthDate"
-                   name="birthDate" placeholder="{{author.birthDate}}"
-                   ngModel>
+                   name="birthDate" [(ngModel)]="author.birthDate">
           </div>
 
           <div class="form-group">
@@ -46,7 +45,7 @@
                 id="shortBio"
                 class="form-control"
                 name="shortBio"
-                ngModel placeholder="{{author.shortBio}}">
+                [(ngModel)]="author.shortBio">
           </textarea>
             </div>
           </div>

@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {AuthorService} from '../auth/author.service';
-import {AuthorLoginModel} from '../auth/authorLogin.model';
 import {Router} from '@angular/router';
+import {LoginConformation} from '../auth/loginConformation';
 
 @Component({
   selector: 'app-header',
@@ -13,16 +12,17 @@ export class HeaderComponent implements OnInit{
   constructor(private authService: AuthorService, private router: Router) {
   }
 
-  isLogout = true;
+  involvedUser: LoginConformation;
 
   ngOnInit(): void {
-    this.isLogout = true;
+    this.involvedUser = true;
   }
 
   // tslint:disable-next-line:typedef
   logout() {
     this.authService.logout().subscribe(data => {
-      this.isLogout = false;
+      this.involvedUser = false;
+      console.warn(`${this.involvedUser} Header Login`);
       this.router.navigate(['/login']);
     });
   }

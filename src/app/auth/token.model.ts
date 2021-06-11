@@ -8,6 +8,5 @@ export class token {
   public token_type ?: string;
   public scope ?: string;
   // tslint:disable-next-line:variable-name
-  public error_description ?: string;
-  public error ?: string;
+    public error ?: string;
 }
