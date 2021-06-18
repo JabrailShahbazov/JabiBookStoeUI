@@ -17,7 +17,7 @@
              routerLinkActive="Active">Author</a>
         </li>
         <li class="nav-item" *ngIf="involvedUser" >
-          <a class="nav-link active" aria-current="page" style="cursor: pointer"  >Login</a>
+          <a class="nav-link active" aria-current="page" style="cursor: pointer"  routerLink="/login"  >Login</a>
         </li>
         <li class="nav-item" >
           <a class="nav-link active" aria-current="page" style="cursor: pointer" (click)="logout()">Loguot</a>

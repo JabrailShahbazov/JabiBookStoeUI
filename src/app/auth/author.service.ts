@@ -27,4 +27,5 @@ export class AuthorService {
   logout(): Observable<token> {
     return this.http.get<token>(`${this.URL}/api/account/logout`, {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
   }
+
 }
